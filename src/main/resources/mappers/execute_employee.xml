@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yesod.IEmployeeOperation">
+    <resultMap id="EmployeeMap" type="malkuth.Employee">
+        <id property="e_id" column="eid"/>
+        <result property="e_name" column="ename"/>
+        <result property="age" column="age"/>
+        <result property="gender" column="gender"/>
+        <result property="email" column="email"/>
+        <association property="department" javaType="malkuth.Department">
+            <id property="d_id" column="did"/>
+            <result property="d_name" column="dname"/>
+        </association>
+    </resultMap>
+    <sql id="getAllBase">
+        select * from employee,department where Employee.deptid = department.did
+    </sql>
+
+    <select id="getAll" resultMap="EmployeeMap">
+        <include refid="getAllBase"/>
+    </select>
+
+    <select id="getByCondition" resultMap="EmployeeMap">
+        <include refid="getAllBase"/>
+        <if test="query != null and query != ''">
+            and ename like '%${query}%'
+        </if>
+        order by eid
+        <if test="quantity != 0">
+            limit #{floor},#{quantity}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from employee,department where Employee.deptid = department.did
+        <if test="query != null and query != ''">
+            and ename like '%${query}%'
+        </if>
+    </select>
+
+    <select id="getNewID" resultType="java.lang.Integer">
+        select max(eid) from employee
+    </select>
+
+    <select id="getByID" resultMap="EmployeeMap">
+        select * from employee,department where eid=#{eid} and Employee.deptid = department.did
+    </select>
+    <select id="getDepartmentName" resultType="java.lang.String">
+        select dname from department where did=#{departmentID}
+    </select>
+
+    <insert id="insertData">
+        insert into employee(ename,age,gender,email,deptid)
+        values(#{e_name},#{age},#{gender},#{email},#{department.d_id})
+    </insert>
+
+    <update id="modifyData">
+        update employee set ename = #{e_name},age = #{age},gender = #{gender},email = #{email},deptid =
+        #{department.d_id} where eid=#{e_id}
+    </update>
+
+    <delete id="deleteData">
+        delete from employee where eid=#{e_id}
+    </delete>
+</mapper>

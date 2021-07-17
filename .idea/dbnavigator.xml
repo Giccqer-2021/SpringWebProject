@@ -24,15 +24,21 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="2de917ea-ccb0-4e86-a5fe-9529970c03fa">
+        <schema name="default" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="2de917ea-ccb0-4e86-a5fe-9529970c03fa">
-      <console name="Database" type="STANDARD" schema="default" session="Main"><![CDATA[select * from employee,department where Employee.deptid = department.did  order by eid]]></console>
+      <console name="Database" type="STANDARD" schema="default" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="2de917ea-ccb0-4e86-a5fe-9529970c03fa" object-ref="schemas/default/tables/employee" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="2de917ea-ccb0-4e86-a5fe-9529970c03fa" />
@@ -52,6 +58,9 @@
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
   </component>
+  <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/sql/all.sql" connection-id="2de917ea-ccb0-4e86-a5fe-9529970c03fa" session-id="MAIN" current-schema="default" />
+  </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />
     <execution-history>
@@ -68,7 +77,9 @@
     <filters />
   </component>
   <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
-    <recently-used-interfaces />
+    <recently-used-interfaces>
+      <mapping database-type="MYSQL" interface-id="DEFAULT" />
+    </recently-used-interfaces>
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
